@@ -16,10 +16,10 @@ $formGap: 0.375rem;
 
 .section1 {
 	background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
-		url('../../../assets/images/bg.webp') top center no-repeat;
+		url('../../../assets/images/rax_home.jpg') top center no-repeat;
 	background-size: cover;
 	height: 100%;
-	text-align: center;
+	text-align: left;
 	position: relative;
 	color: $loginColor;
 }
@@ -79,7 +79,7 @@ h4 {
 }
 
 .openvidu-slogan-container {
-	margin-top: 80px;
+	margin-top: 5px;
 }
 
 #form-img {
@@ -98,7 +98,7 @@ h4 {
 
 .grid {
 	inline-size: 90%;
-	margin-inline: auto;
+	margin-inline: left;
 	max-inline-size: 26rem;
 }
 

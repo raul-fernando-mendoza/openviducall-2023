@@ -8,9 +8,11 @@
 		</div>
 	</mat-toolbar>
 	<div class="openvidu-slogan-container">
-		<a href="https://openvidu.io/" target="_blank">
-			<img id="form-img" src="assets/images/openvidu_logo.png" />
+		<!--
+		<a href="https://www.raxacademy.com/" target="_blank">
+			<img id="form-img" src="assets/images/rax_log.jpg" />
 		</a>
+		-->
 		<h4 id="slogan-text">Bienvenido a RaxAcademy Conferencias v1</h4>
 	</div>
 	<div class="form-container">
@@ -69,6 +71,15 @@
 						<mat-icon matTooltip="Session name">video_camera_front</mat-icon>
 						<span class="hidden">Session Name</span></label
 					>
+
+					<select formControlName="sessionName" id="session-name-input" name="sessionName" class="form-input">
+						<option value="Tecnica1">Tecnica 1</option>
+						<option value="Tecnica2">Tecnica 2</option>
+						<option value="Tecnica3">Tecnica 4</option>
+						<option value="Tecnica4">Tecnica 5</option>
+						<option value="Improvisacion1">Improvisacion 1</option>
+					  </select>
+<!--
 					<input
 						formControlName="sessionName"
 						autocomplete="off"
@@ -87,6 +98,7 @@
 					>
 						<mat-icon>cached</mat-icon>
 					</button>
+				-->					
 				</div>
 				<div class="roomError" id="requiredNameError" *ngIf="sessionForm.get('sessionName').hasError('required')">
 					Session name is required
