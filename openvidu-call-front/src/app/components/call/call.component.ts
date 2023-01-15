@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ParticipantService, RecordingInfo, TokenModel } from 'openvidu-angular';
 
 import { RestService } from '../../services/rest.service';
+import { AuthService } from 'src/app/services/auth.services';
 
 @Component({
 	selector: 'app-call',
@@ -15,7 +16,7 @@ export class CallComponent implements OnInit {
 	joinSessionClicked: boolean = false;
 	closeClicked: boolean = false;
 	isSessionAlive: boolean = false;
-	recordingEnabled: boolean = true;
+	recordingEnabled: boolean = false;
 	recordingList: RecordingInfo[] = [];
 	recordingError: any;
 	serverError: string = '';
@@ -26,7 +27,9 @@ export class CallComponent implements OnInit {
 		private restService: RestService,
 		private participantService: ParticipantService,
 		private router: Router,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+
+		private authService: AuthService
 	) {}
 
 	async ngOnInit() {
@@ -89,7 +92,7 @@ export class CallComponent implements OnInit {
 			nickname = this.participantService.getLocalParticipant().getNickname();
 		}
 		const response = await this.restService.getTokens(this.sessionId, nickname);
-		this.recordingEnabled = response.recordingEnabled;
+		this.recordingEnabled = response.recordingEnabled && this.authService.isAdmin();
 		this.recordingList = response.recordings;
 		this.tokens = {
 			webcam: response.cameraToken,
