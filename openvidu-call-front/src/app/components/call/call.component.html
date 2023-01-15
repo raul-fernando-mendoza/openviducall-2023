@@ -1,0 +1,23 @@
+<ov-videoconference
+	*ngIf="!loading && !serverError"
+	[tokens]="tokens"
+	[recordingActivityRecordingsList]="recordingList"
+	[recordingActivityRecordingError]="recordingError"
+	(onToolbarLeaveButtonClicked)="onLeaveButtonClicked()"
+	(onToolbarStartRecordingClicked)="onStartRecordingClicked()"
+	(onActivitiesPanelStartRecordingClicked)="onStartRecordingClicked()"
+	(onToolbarStopRecordingClicked)="onStopRecordingClicked()"
+	(onActivitiesPanelStopRecordingClicked)="onStopRecordingClicked()"
+	(onActivitiesPanelDeleteRecordingClicked)="onDeleteRecordingClicked($event)"
+	(onNodeCrashed)="onNodeCrashed()"
+	[activitiesPanelRecordingActivity]="recordingEnabled"
+	[toolbarRecordingButton]="recordingEnabled"
+>
+</ov-videoconference>
+
+<div *ngIf="!loading && serverError" class="error">
+	<mat-icon>error</mat-icon>
+	<span>
+		{{ serverError }}
+	</span>
+</div>
