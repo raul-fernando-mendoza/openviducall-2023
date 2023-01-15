@@ -92,7 +92,7 @@ export class CallComponent implements OnInit {
 			nickname = this.participantService.getLocalParticipant().getNickname();
 		}
 		const response = await this.restService.getTokens(this.sessionId, nickname);
-		this.recordingEnabled = response.recordingEnabled && this.authService.isAdmin();
+		this.recordingEnabled = this.authService.isAdmin() ? true : response.recordingEnabled;
 		this.recordingList = response.recordings;
 		this.tokens = {
 			webcam: response.cameraToken,

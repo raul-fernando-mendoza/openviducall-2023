@@ -76,6 +76,7 @@ export class AuthService {
 			console.log('Loggin succeeded', username, password);
 		} catch (error) {
 			console.error('Error doing login ', error);
+			this.is_admin = false
 			this.loginError = true;
 			this.logout();
 		}
