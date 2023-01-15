@@ -142,4 +142,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 			await this.authService.loginUsingLocalStorageData();
 		}		
 	}	
+
+	isAdmin():boolean{
+		return this.authService.isAdmin()
+	}
+
 }

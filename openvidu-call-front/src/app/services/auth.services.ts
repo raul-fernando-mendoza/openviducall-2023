@@ -14,8 +14,6 @@ export class AuthService {
 	private logged: BehaviorSubject<boolean> = new BehaviorSubject(false);
 	private loginError: boolean = false;
 
-	private is_admin: boolean;
-
 	constructor(private callService: CallService, private restService: RestService) {
 		this.isLoggedObs = this.logged.asObservable();
 	}
@@ -67,16 +65,9 @@ export class AuthService {
 			this.password = password;
 			this.loginError = false;
 			this.logged.next(true);
-			if( this.username === 'admin'){
-				this.is_admin = true
-			}
-			else{
-				this.is_admin = false
-			}
 			console.log('Loggin succeeded', username, password);
 		} catch (error) {
 			console.error('Error doing login ', error);
-			this.is_admin = false
 			this.loginError = true;
 			this.logout();
 		}
@@ -98,6 +89,6 @@ export class AuthService {
 	}
 
 	isAdmin(){
-		return this.is_admin
+		return this.username == "admin"
 	}
 }
