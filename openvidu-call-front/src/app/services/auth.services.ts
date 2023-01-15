@@ -88,7 +88,7 @@ export class AuthService {
 		localStorage.removeItem(this.AUTH_DATA_NAME);
 	}
 
-	isAdmin(){
-		return this.username == "admin"
+	isAdmin():boolean{
+		return this.username == "admin" ? true: false
 	}
 }

@@ -100,7 +100,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 	private subscribeToLogin() {
 		this.loginSubscription = this.authService.isLoggedObs.subscribe((isLogged) => {
 			this.isUserLogged = isLogged;
-			this.loginError = this.authService.hadLoginError();
+			this.username = this.authService.getUsername()
+			this.loginError = this.authService.hadLoginError()
 		});
 	}
 
@@ -130,7 +131,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 		return uniqueNamesGenerator(configName).replace(/[^\w-]/g, '');
 	}
 
-	async useAdmin($event) {
+	async onUseAdmin($event) {
 		$event.preventDefault()
 		this.adminLogin = true
 		if (this.adminLogin ) {
@@ -140,7 +141,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 			this.loginForm.get('password').setValidators(Validators.required);
 			this.loginForm.get('password').setValue(this.authService.getPassword());
 			await this.authService.loginUsingLocalStorageData();
-		}		
+		}
+		this.logout()	
 	}	
 
 	isAdmin():boolean{

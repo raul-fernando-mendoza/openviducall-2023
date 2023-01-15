@@ -119,7 +119,7 @@
 		<div>
 			adminLogin: {{ adminLogin }}<br/>
 			isUserLogged: {{ isUserLogged }} <br>
-			<a *ngIf="!isAdmin()" href="#" (click)="useAdmin($event)" target="_blank">login admin</a>
+			<a *ngIf="!isAdmin()" href="#" (click)="onUseAdmin($event)" target="_blank">login admin</a>
 			<span *ngIf="isAdmin()">Bienvenido Admin</span>
 		</div>
 	</div>

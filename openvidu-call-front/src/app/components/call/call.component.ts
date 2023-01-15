@@ -63,7 +63,12 @@ export class CallComponent implements OnInit {
 	}
 	async onStartRecordingClicked() {
 		try {
-			await this.restService.startRecording(this.sessionId);
+			if( this.authService.isAdmin() ){
+				await this.restService.startRecording(this.sessionId);
+			}
+			else{
+				alert("Usted no esta authorizado para iniciar una grabacion")
+			}
 		} catch (error) {
 			this.recordingError = error;
 		}
