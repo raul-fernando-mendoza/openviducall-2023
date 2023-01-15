@@ -14,6 +14,8 @@ export class AuthService {
 	private logged: BehaviorSubject<boolean> = new BehaviorSubject(false);
 	private loginError: boolean = false;
 
+	private is_admin: boolean;
+
 	constructor(private callService: CallService, private restService: RestService) {
 		this.isLoggedObs = this.logged.asObservable();
 	}
@@ -54,11 +56,23 @@ export class AuthService {
 		const encodedAuthData = `${window.btoa(`${username}:${password}`)}`;
 		localStorage.setItem(this.AUTH_DATA_NAME, encodedAuthData);
 		try {
-			await this.restService.login(username, password);
+			if( username == "admin"){
+				await this.restService.adminLogin(password);
+			}
+			else{
+				await this.restService.login(username, password);
+			}	
+			
 			this.username = username;
 			this.password = password;
 			this.loginError = false;
 			this.logged.next(true);
+			if( this.username === 'admin'){
+				this.is_admin = true
+			}
+			else{
+				this.is_admin = false
+			}
 			console.log('Loggin succeeded', username, password);
 		} catch (error) {
 			console.error('Error doing login ', error);
@@ -80,5 +94,9 @@ export class AuthService {
 
 	private clearAuthData() {
 		localStorage.removeItem(this.AUTH_DATA_NAME);
+	}
+
+	isAdmin(){
+		return this.is_admin
 	}
 }

@@ -1,17 +1,29 @@
-git clone https://github.com/OpenVidu/openvidu-call.git
+#to build first clone 
+git clone https://github.com/raul-fernando-mendoza/openviducall-2023.git
 
-
-#use this version has is the last that compiles
-git checkout a2438adc1baee1fdb2c97a5298071fe4c8a5724f
-
-#from the root folder run
+cd openviducall-2023
+#from the openviducall-2023 folder build the image 
 docker build -f ./docker/Dockerfile.node -t raxacademy:call --build-arg RELEASE_VERSION=1.0 .
 
-modify the image in the file to the new raxacademy:call
+#modify the file /opt/openvidu docker-compose.override.yaml to run the image generated: raxacademy:call
 docker-compose.override.yaml
 
+#restart the openvidu 
+cd /opt/openvidu
+./openvidu restart
+
+########################## some useful commands
+
+#to run a docker compose yaml
 to run use
 sudo docker-compose up
+
+
+##this was a checkout from
+git clone https://github.com/OpenVidu/openvidu-call.git
+
+#use this version as is the last that compiles
+git checkout a2438adc1baee1fdb2c97a5298071fe4c8a5724f
 
 
 

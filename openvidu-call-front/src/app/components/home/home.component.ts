@@ -30,6 +30,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 	private queryParamSubscription: Subscription;
 	private loginSubscription: Subscription;
 
+	adminLogin = false;
+
 	constructor(
 		private router: Router,
 		public formBuilder: UntypedFormBuilder,
@@ -47,14 +49,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 			await this.callService.initialize();
 			this.isPrivateAccess = this.callService.isPrivateAccess();
 
-			if (this.isPrivateAccess) {
-				this.subscribeToLogin();
-				this.loginForm.get('username').setValidators(Validators.required);
-				this.loginForm.get('username').setValue(this.authService.getUsername());
-				this.loginForm.get('password').setValidators(Validators.required);
-				this.loginForm.get('password').setValue(this.authService.getPassword());
-				await this.authService.loginUsingLocalStorageData();
-			}
+
 
 			this.username = this.authService.getUsername();
 		} catch (error) {
@@ -116,6 +111,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 				const sessionId = params.sessionId.replace(/[^\w-]/g, '');
 				this.sessionForm.get('sessionName').setValue(sessionId);
 			}
+		
 		});
 	}
 
@@ -133,4 +129,17 @@ export class HomeComponent implements OnInit, OnDestroy {
 		};
 		return uniqueNamesGenerator(configName).replace(/[^\w-]/g, '');
 	}
+
+	async useAdmin($event) {
+		$event.preventDefault()
+		this.adminLogin = true
+		if (this.adminLogin ) {
+			this.subscribeToLogin();
+			this.loginForm.get('username').setValidators(Validators.required);
+			this.loginForm.get('username').setValue(this.authService.getUsername());
+			this.loginForm.get('password').setValidators(Validators.required);
+			this.loginForm.get('password').setValue(this.authService.getPassword());
+			await this.authService.loginUsingLocalStorageData();
+		}		
+	}	
 }

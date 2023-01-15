@@ -18,7 +18,7 @@
 	<div class="form-container">
 		<div class="grid">
 			<form
-				*ngIf="isPrivateAccess && !isUserLogged"
+				*ngIf="adminLogin && !isUserLogged"
 				[formGroup]="loginForm"
 				novalidate
 				(ngSubmit)="login()"
@@ -59,7 +59,7 @@
 			</form>
 
 			<form
-				*ngIf="isUserLogged || !isPrivateAccess"
+				*ngIf="isUserLogged || !adminLogin"
 				[formGroup]="sessionForm"
 				novalidate
 				(ngSubmit)="goToVideoCall()"
@@ -115,6 +115,11 @@
 					<span>Server connection failed!</span>
 				</div>
 			</form>
+		</div>
+		<div>
+			adminLogin: {{ adminLogin }}<br/>
+			isUserLogged: {{ isUserLogged }} <br>
+			<a href="#" (click)="useAdmin($event)" target="_blank">login admin</a>
 		</div>
 	</div>
 
