@@ -2,7 +2,7 @@
 git clone https://github.com/raul-fernando-mendoza/openviducall-2023.git
 
 cd openviducall-2023
-#from the openviducall-2023 folder build the image 
+#from the openviducall-2023 folder build the image mke sure is a one line ends with .
 docker build -f ./docker/Dockerfile.node -t raxacademy:call --build-arg RELEASE_VERSION=1.0 .
 
 #modify the file /opt/openvidu docker-compose.override.yaml to run the image generated: raxacademy:call
