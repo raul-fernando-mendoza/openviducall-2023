@@ -24,6 +24,7 @@
     "@types/mocha": "^10.0.0",
     "@types/node": "16.11.9",
     "@types/selenium-webdriver": "^4.1.5",
+    "autolinker": "^4.0.0",
     "chai": "^4.3.6",
     "chromedriver": "^106.0.1",
     "codelyzer": "6.0.2",
@@ -34,7 +35,10 @@
     "ts-node": "10.9.1",
     "tslib": "2.4.0",
     "tslint": "6.1.3",
-    "typescript": "4.8.4"
+    "typescript": "4.8.4",
+    "@angular/flex-layout": "^14.0.0-beta.41",
+    "openvidu-browser": "^2.25.0"
+
   },
   "name": "openvidu-call",
   "private": true,
