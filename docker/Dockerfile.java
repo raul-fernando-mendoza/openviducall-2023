@@ -1,5 +1,5 @@
 # Build OpenVidu Call for production
-FROM node:lts-alpine3.16 as openvidu-call-build
+FROM node:lts-alpine3.18 as openvidu-call-build
 
 WORKDIR /openvidu-call
 
