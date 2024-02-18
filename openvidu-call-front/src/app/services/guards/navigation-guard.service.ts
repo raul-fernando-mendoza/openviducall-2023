@@ -11,6 +11,8 @@ export class NavigationGuardService implements CanActivate {
 
 	// Check if user can navigate to the route
 	async canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+		return true;
+		/*
 		await this.callService.initialize();
 
 		if (this.callService.isPrivateAccess()) {
@@ -24,5 +26,6 @@ export class NavigationGuardService implements CanActivate {
 			return false;
 		}
 		return true;
+		*/
 	}
 }

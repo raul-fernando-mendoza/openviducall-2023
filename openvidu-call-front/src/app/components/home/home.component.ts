@@ -30,10 +30,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 	private queryParamSubscription: Subscription;
 	private loginSubscription: Subscription;
 
-	adminLogin = false;
-	password = "Argos4905"
-
-	isAdmin = false
 	constructor(
 		private router: Router,
 		public formBuilder: UntypedFormBuilder,
@@ -133,16 +129,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 		return uniqueNamesGenerator(configName).replace(/[^\w-]/g, '');
 	}
 
-	async onUseAdmin($event) {
-		let pass = prompt("inserte su password","")
-		if( pass != this.password ){
-		  alert( "incorrect password")
-		  return -1
-		}
-		else{
-			this.isAdmin = true
-		}
-	}	
 
 
 }

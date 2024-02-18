@@ -1,9 +1,5 @@
 <div class="section1">
 	<mat-toolbar id="header">
-		<div class="login-admin">
-			<button mat-button (click)="onUseAdmin($event)">login admin</button>
-			<span *ngIf="isAdmin">Bienvenido Admin</span>
-		</div>
 	</mat-toolbar>
 	<div class="openvidu-slogan-container">
 		<!--
@@ -15,6 +11,7 @@
 	</div>
 	<div class="form-container">
 		<div class="grid">
+			<!--
 			<form
 				*ngIf="adminLogin && !isUserLogged"
 				[formGroup]="loginForm"
@@ -55,9 +52,9 @@
 					<span>Server connection failed!</span>
 				</div>
 			</form>
+		-->
 
 			<form
-				*ngIf="isUserLogged || !adminLogin"
 				[formGroup]="sessionForm"
 				novalidate
 				(ngSubmit)="goToVideoCall()"
@@ -140,5 +137,5 @@
 			<span>{{ version }}</span>
 		</div>
 	</mat-toolbar>
-	<app-vmcomputestatus *ngIf="isAdmin"></app-vmcomputestatus>	
+	<app-vmcomputestatus></app-vmcomputestatus>	
 </div>

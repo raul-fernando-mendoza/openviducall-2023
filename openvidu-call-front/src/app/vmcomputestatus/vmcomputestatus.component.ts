@@ -17,18 +17,51 @@ export class VmcomputestatusComponent implements AfterViewInit {
   submitting = false
 
 
+  maxStatusCount = 120
+  statusCount = 0
+  intervalId
+
+	adminLogin = false;
+	password = "Argos4905"
+
+	isAdmin = false
+
+  waitForStatus = ""
 
   
   constructor(private compute:VminstanceService) { }
   ngAfterViewInit(): void {
-    setInterval(()=> { this.getStatus() }, 5000);
+    this.getStatus()
     
+  }
+
+  statusUpdateStart(){
+    this.statusCount = this.maxStatusCount
+    clearInterval( this.intervalId )
+    this.intervalId = setInterval(()=> { 
+      this.statusCount--;
+      if( this.statusCount <= 0 || this.waitForStatus == this.instanceStatus){
+        clearInterval( this.intervalId )
+        if( this.waitForStatus == this.instanceStatus  ){
+          this.lastAction = "completado"
+        }
+        else{
+          this.lastAction = "Tiempo maximo alcanzado favor reintente"
+        }
+        
+      }
+      else{
+        this.getStatus() 
+        this.lastAction = "Por favor espere:" + this.statusCount
+      }
+    }, 1000);
   }
 
 
   getStatus(){
     this.submitting = true
     var thiz = this
+
     this.compute.vminstanceApiInterface("getComputeInstanceList",environment.projectId, environment.zone ).subscribe( {
       next(response) { 
         let instances = response["result"]["instances"]
@@ -53,10 +86,12 @@ export class VmcomputestatusComponent implements AfterViewInit {
   onStart() {
     this.submitting = true
     var thiz = this
+    this.waitForStatus = 'RUNNING'
     this.compute.vminstanceApiInterface("computeInstanceStart",environment.projectId, environment.zone, environment.OPENVIDU_INSTANCE_NAME ).subscribe( {
       next(response) { 
         thiz.lastAction = "Open vidu esta siendo inicializado por favor espere" 
         thiz.submitting = false;
+        thiz.statusUpdateStart()
       },
       error(err) { 
         alert('Error: ' + err.error.error); 
@@ -73,10 +108,12 @@ export class VmcomputestatusComponent implements AfterViewInit {
 
     this.submitting = true
     var thiz = this
+    this.waitForStatus = 'TERMINATED'    
     this.compute.vminstanceApiInterface("computeInstanceStop",environment.projectId, environment.zone, environment.OPENVIDU_INSTANCE_NAME ).subscribe( {
       next(response) { 
         thiz.lastAction = "Open vidu esta siendo detenido por favor espere."
         thiz.submitting = false;
+        thiz.statusUpdateStart()
       },
       error(err) { 
         alert('Error: ' + err.error.error); 
@@ -88,5 +125,15 @@ export class VmcomputestatusComponent implements AfterViewInit {
       }
     })     
   }
-  
+
+	onUseAdmin($event) {
+		let pass = prompt("inserte su password","")
+		if( pass != this.password ){
+		  alert( "incorrect password")
+		  return -1
+		}
+		else{
+			this.isAdmin = true
+		}
+	}	  
 }
