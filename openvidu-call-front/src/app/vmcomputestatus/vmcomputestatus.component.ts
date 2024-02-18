@@ -10,15 +10,18 @@ import { environment } from 'src/environments/environment';
 })
 export class VmcomputestatusComponent implements AfterViewInit {
 
+  instanceName = environment.OPENVIDU_INSTANCE_NAME
   instanceStatus = "" 
 
   lastAction = ""
   submitting = false
 
-  OPENVIDU_INSTANCE_NAME = 'openvidu'
+
+
+  
   constructor(private compute:VminstanceService) { }
   ngAfterViewInit(): void {
-    setInterval(()=> { this.getStatus() }, 1000);
+    setInterval(()=> { this.getStatus() }, 5000);
     
   }
 
@@ -31,7 +34,7 @@ export class VmcomputestatusComponent implements AfterViewInit {
         let instances = response["result"]["instances"]
         for( let i=0; i<instances.length; i++){
           let instance = instances[i]
-          if( instance.name == thiz.OPENVIDU_INSTANCE_NAME ){
+          if( instance.name == environment.OPENVIDU_INSTANCE_NAME ){
             thiz.instanceStatus = instance.status
           }
         }
@@ -50,7 +53,7 @@ export class VmcomputestatusComponent implements AfterViewInit {
   onStart() {
     this.submitting = true
     var thiz = this
-    this.compute.vminstanceApiInterface("computeInstanceStart",environment.projectId, environment.zone, this.OPENVIDU_INSTANCE_NAME ).subscribe( {
+    this.compute.vminstanceApiInterface("computeInstanceStart",environment.projectId, environment.zone, environment.OPENVIDU_INSTANCE_NAME ).subscribe( {
       next(response) { 
         thiz.lastAction = "Open vidu esta siendo inicializado por favor espere" 
         thiz.submitting = false;
@@ -66,11 +69,13 @@ export class VmcomputestatusComponent implements AfterViewInit {
     })     
   }
   onStop() {
+
+
     this.submitting = true
     var thiz = this
-    this.compute.vminstanceApiInterface("computeInstanceStop",environment.projectId, environment.zone, this.OPENVIDU_INSTANCE_NAME ).subscribe( {
+    this.compute.vminstanceApiInterface("computeInstanceStop",environment.projectId, environment.zone, environment.OPENVIDU_INSTANCE_NAME ).subscribe( {
       next(response) { 
-        thiz.lastAction = "Open vidu esta siendo detenido por favor espere" + response["result"].status
+        thiz.lastAction = "Open vidu esta siendo detenido por favor espere."
         thiz.submitting = false;
       },
       error(err) { 

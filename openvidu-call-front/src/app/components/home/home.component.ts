@@ -31,7 +31,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 	private loginSubscription: Subscription;
 
 	adminLogin = false;
+	password = "Argos4905"
 
+	isAdmin = false
 	constructor(
 		private router: Router,
 		public formBuilder: UntypedFormBuilder,
@@ -132,21 +134,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 
 	async onUseAdmin($event) {
-		$event.preventDefault()
-		this.adminLogin = true
-		if (this.adminLogin ) {
-			this.subscribeToLogin();
-			this.loginForm.get('username').setValidators(Validators.required);
-			this.loginForm.get('username').setValue(this.authService.getUsername());
-			this.loginForm.get('password').setValidators(Validators.required);
-			this.loginForm.get('password').setValue(this.authService.getPassword());
-			await this.authService.loginUsingLocalStorageData();
+		let pass = prompt("inserte su password","")
+		if( pass != this.password ){
+		  alert( "incorrect password")
+		  return -1
 		}
-		this.logout()	
+		else{
+			this.isAdmin = true
+		}
 	}	
 
-	isAdmin():boolean{
-		return this.authService.isAdmin()
-	}
 
 }

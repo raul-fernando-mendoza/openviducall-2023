@@ -1,10 +1,8 @@
 <div class="section1">
 	<mat-toolbar id="header">
-		<div *ngIf="isUserLogged" id="logout-content">
-			<span>Hi {{ username }}, do you want to logout?</span>
-			<button matTooltip="Logout" mat-icon-button id="logout-btn" (click)="logout()">
-				<mat-icon>logout</mat-icon>
-			</button>
+		<div class="login-admin">
+			<button mat-button (click)="onUseAdmin($event)">login admin</button>
+			<span *ngIf="isAdmin">Bienvenido Admin</span>
 		</div>
 	</mat-toolbar>
 	<div class="openvidu-slogan-container">
@@ -115,10 +113,9 @@
 				</div>
 			</form>
 		</div>
-		<div class="login-admin">
-			<a  *ngIf="!isAdmin()" href="#" (click)="onUseAdmin($event)" target="_blank">login admin</a>
-			<span *ngIf="isAdmin()">Bienvenido Admin</span>
-		</div>
+		
+
+		
 	</div>
 
 	<mat-toolbar class="footer">
@@ -143,7 +140,5 @@
 			<span>{{ version }}</span>
 		</div>
 	</mat-toolbar>
-
-	VMS:
-	<app-vmcomputestatus></app-vmcomputestatus>	
+	<app-vmcomputestatus *ngIf="isAdmin"></app-vmcomputestatus>	
 </div>

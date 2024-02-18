@@ -6,11 +6,13 @@ export const environment = {
   production: false,
   openvidu_url: '',
   openvidu_secret: '',
-  computeURL:'https://us-central1-thoth-qa.cloudfunctions.net/computeRequest',
-  projectId:'thoth-qa',
-  zone:'us-central1-a'
+  computeURL:'https://us-central1-thoth-dev-346022.cloudfunctions.net/computeRequest',
+  projectId:'thoth-dev-346022',
+  zone:'us-central1-a',
+  OPENVIDU_INSTANCE_NAME:'openvidu-test'
 
 };
+
 
 /*
  * In development mode, to ignore zone related error stack frames such as
