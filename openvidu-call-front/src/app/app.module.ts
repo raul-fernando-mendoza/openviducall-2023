@@ -23,6 +23,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { OpenViduAngularConfig, OpenViduAngularModule } from 'openvidu-angular';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { HttpRequestInterceptor } from './services/http-interceptor.service';
+import { VmcomputestatusComponent } from './vmcomputestatus/vmcomputestatus.component';
 
 // Services
 
@@ -31,7 +32,7 @@ const config: OpenViduAngularConfig = {
 };
 
 @NgModule({
-	declarations: [AppComponent, HomeComponent, CallComponent, AdminDashboardComponent],
+	declarations: [AppComponent, HomeComponent, CallComponent, AdminDashboardComponent, VmcomputestatusComponent],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,

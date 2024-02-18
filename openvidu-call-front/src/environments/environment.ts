@@ -5,7 +5,11 @@
 export const environment = {
   production: false,
   openvidu_url: '',
-  openvidu_secret: ''
+  openvidu_secret: '',
+  computeURL:'https://us-central1-thoth-qa.cloudfunctions.net/computeRequest',
+  projectId:'thoth-qa',
+  zone:'us-central1-a'
+
 };
 
 /*
